@@ -19,9 +19,21 @@
         <!-- </div> -->
     <!-- </div> -->
 	
-<div id="products">
-   <!-- all divs will append here -->
-</div>
+<table border = 1>
+  <tr>
+  <td>ID Kategori</td>
+	<td> ID Produk</td>
+	
+  </tr>
+	
+  <tr>
+	<td id="categories">
+		
+	</td>
+	<td id="products"></td>
+	
+  </tr>
+</table>
 </body>
 
 </html>
@@ -30,27 +42,53 @@
 <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+
 <script type="text/javascript">
     app.initialize();
+	
+	
 
-	$.ajaxSetup({ cache: false });
-		var url = 'http://go-obat.com/markets/api/products?output_format=JSON';
-		<!-- var url = 'http://www.phonegaptutorial.com/wp-content/uploads/examples/user.json'; -->
-		$.getJSON(url, function(datas){
-			<!-- process the data -->
-			
-			var products = datas['products'];
-			<!-- console.log(products['1']['id']); -->
-			<!-- console.log(products.length); -->
-
-			var html='';
-				for(i = 0; i < products.length; i++) {
-					html += '<div id="div'+ i +'" />Produk Id = '+ products[""+i+""]["id"] +' dari index '+ i +'</div>';
-				}
-			$('#products').append(html);
+	var url = 'http://go-obat.com/markets/api/products?output_format=JSON';
+	var urlDetailsProduct = "http://go-obat.com/markets/api/products/";
+	var username = "ARMMR8JEW5FLK7AS63FLHUU72I29QDXP";
+	var password = "";
+	
+	$.ajaxSetup({
+		cache: false ,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("Allow", "GET, HEAD, PUT, DELETE");
+		},
+	});
+	
+	$.getJSON(url, 
+		function(datas){
+		var products = datas['products'];
+		var html='';
+			for(i = 0; i < products.length; i++) {
+				var idProduct = products[""+i+""]["id"];
+				var outputFormat = "http://go-obat.com/markets/api/products/"+idProduct+"?output_format=JSON";
+				$.getJSON(outputFormat, 
+						function(dataProduct){
+						console.log(dataProduct);
+						<!-- var products = datas['products']; -->
+						var Detailproducts='';
 						
+							<!-- for(i = 0; i < products.length; i++) {	 -->
+								<!-- var idProduct = products[""+i+""]["id"]; -->
+								<!-- Detailproducts += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>'; -->
+									
+							<!-- } -->
+						$('#Detailproducts').append(Detailproducts);
+					});
+				console.log(outputFormat);
+				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';
+					
+			}
+
+		$('#products').append(html);
+					
 		$.ajaxSetup({ cache: true });
-		});
+	});
 
 		
 
