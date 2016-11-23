@@ -30,7 +30,13 @@
 	<td id="categories">
 		
 	</td>
-	<td id="products"></td>
+	<td id="products">
+		<tr>
+			<td id="Detailproducts">nama</td>
+			<tr id ="Detailproductsname">
+			</tr>
+		</tr>
+	</td>
 	
   </tr>
 </table>
@@ -66,25 +72,16 @@
 		var html='';
 			for(i = 0; i < products.length; i++) {
 				var idProduct = products[""+i+""]["id"];
-				var outputFormat = "http://go-obat.com/markets/api/products/"+idProduct+"?output_format=JSON";
-				$.getJSON(outputFormat, 
-						function(dataProduct){
-						console.log(dataProduct);
-						<!-- var products = datas['products']; -->
-						var Detailproducts='';
-						
-							<!-- for(i = 0; i < products.length; i++) {	 -->
-								<!-- var idProduct = products[""+i+""]["id"]; -->
-								<!-- Detailproducts += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>'; -->
-									
-							<!-- } -->
-						$('#Detailproducts').append(Detailproducts);
-					});
-				console.log(outputFormat);
-				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';
-					
+				
+				var setUrlProducts = "http://go-obat.com/markets/api/products/"+idProduct+"?output_format=JSON";
+				$.getJSON(setUrlProducts, 
+					function(setUrlProduct){
+					var Detailproductsname ='';
+					 Detailproductsname += '<td id="" />'+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td>';
+					$('#Detailproductsname').append(Detailproductsname);
+				});
+				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';	
 			}
-
 		$('#products').append(html);
 					
 		$.ajaxSetup({ cache: true });
