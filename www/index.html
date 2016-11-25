@@ -52,12 +52,11 @@
 	
 
 	var url = 'http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/products?output_format=JSON';
-	var urlDetailsProduct = "http://go-obat.com/markets/api/products/";
 	var key = "ARMMR8JEW5FLK7AS63FLHUU72I29QDXP";
 	var password = "";
 	
 	$.ajaxSetup({
-		cache: false ,
+		cache: true ,
 		beforeSend: function(xhr) {
 		   xhr.setRequestHeader('Authorization', ("Basic "
                         .concat(btoa(key))));
@@ -81,13 +80,13 @@
 					var Detailproductsnamecategori ='';
 					var apiIdProduct = setUrlProduct["product"]["id"];
 					var apiIdImage = setUrlProduct["product"]["associations"]["images"][0]["id"];
-					var setUrlImageProduts = "http://go-obat.com/markets/api/images/products/"+apiIdProduct+"/"+apiIdImage+"";
+					var setUrlImageProduts = "http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/images/products/"+apiIdProduct+"/"+apiIdImage+"";
 					console.log(setUrlImageProduts);
 					 Detailproductsname += '<tr id="" /><td><img src="'+setUrlImageProduts+'"></td><td>ID '+ setUrlProduct["product"]["id"] +' nama produk '+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td></tr>';
 					 Detailproductsnamecategori += ' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+'';
 					
 					$('#Detailproductsname').append(Detailproductsname);
-					$('#categories').append(Detailproductsnamecategori);
+					<!-- $('#categories').append(Detailproductsnamecategori); -->
 				});
 				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';	
 			}
