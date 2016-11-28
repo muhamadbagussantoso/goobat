@@ -61,7 +61,7 @@
 		   xhr.setRequestHeader('Authorization', ("Basic "
                         .concat(btoa(key))));
                     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-			console.log(xhr);
+			
 			<!-- xhr.setRequestHeader('Authorization', '...'); -->
 		},
 	});
@@ -81,7 +81,7 @@
 					var apiIdProduct = setUrlProduct["product"]["id"];
 					var apiIdImage = setUrlProduct["product"]["associations"]["images"][0]["id"];
 					var setUrlImageProduts = "http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/images/products/"+apiIdProduct+"/"+apiIdImage+"";
-					console.log(setUrlImageProduts);
+					console.log(products);
 					 Detailproductsname += '<tr id="" /><td><img src="'+setUrlImageProduts+'"></td><td>ID '+ setUrlProduct["product"]["id"] +' nama produk '+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td></tr>';
 					 Detailproductsnamecategori += ' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+'';
 					
@@ -92,7 +92,8 @@
 			}
 		//$('#products').append(html);
 
-		$.ajaxSetup({ cache: true });
+		
 	});
-
+	
+	$.ajaxSetup({ cache: true });
 </script>
