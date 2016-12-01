@@ -141,6 +141,7 @@
 		   xhr.setRequestHeader('Authorization', ("Basic "
                         .concat(btoa(key))));
                     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+					xhr.setRequestHeader("Allow", "GET, HEAD, PUT, DELETE");
 			
 			<!-- xhr.setRequestHeader('Authorization', '...'); -->
 		},
