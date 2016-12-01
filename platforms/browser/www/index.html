@@ -145,7 +145,18 @@
 			<!-- xhr.setRequestHeader('Authorization', '...'); -->
 		},
 	});
-	
+	$.ajax({
+			url: 'http://go-obat.com/markets/api/products/541',
+			dataType: 'xml',
+			success: function(data){
+				// Extract relevant data from XML
+				var xml_node = $('prestashop',data);
+				console.log( xml_node);
+			},
+			error: function(data){
+				console.log('Error loading XML data');
+			}
+	});
 	$.getJSON(urlCategories,function(dataCategories){
 		categories = dataCategories['categories'];
 
