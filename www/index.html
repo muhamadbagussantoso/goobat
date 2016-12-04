@@ -141,24 +141,23 @@
 		   xhr.setRequestHeader('Authorization', ("Basic "
                         .concat(btoa(key))));
                     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-					xhr.setRequestHeader("Allow", "GET, HEAD, PUT, DELETE");
+					xhr.setRequestHeader("Allow", "GET, HEAD, PUT, DELETE, POST");
 			
 			<!-- xhr.setRequestHeader('Authorization', '...'); -->
 		},
 	});
-	$.ajax({
-			url: 'http://go-obat.com/markets/api/products/541',
-			dataType: 'xml',
-			success: function(data){
-				// Extract relevant data from XML
-				var xml_node = $('prestashop',data);
-				console.log( xml_node);
-			},
-			error: function(data){
-				console.log('Error loading XML data');
-			}
-	});
-	$.getJSON(urlCategories,function(dataCategories){
+	var a;
+	$.get("http://go-obat.com/markets/api/products?schema=blank",function(xml) {
+                a = $(xml).children().children();
+				/*$(xml).children().children().each(function(index) {
+				console.log(index + ": " + $(this).text() );
+				});*/
+				//$.post("http://go-obat.com/markets/api/products",a,"xml");
+				console.log(a[0]);
+            },"text");
+	//console.log(a);
+	
+	/*$.getJSON(urlCategories,function(dataCategories){
 		categories = dataCategories['categories'];
 
 		
@@ -193,11 +192,11 @@
 					var apiIdProduct = setUrlProduct["product"]["id"];
 					var apiIdImage = setUrlProduct["product"]["associations"]["images"][0]["id"];
 					var setUrlImageProduts = "http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/images/products/"+apiIdProduct+"/"+apiIdImage+"";
-					 <!-- Detailproductsname += '<tr id="" /><td><img src="'+setUrlImageProduts+'"></td><td>ID '+ setUrlProduct["product"]["id"] +' nama produk '+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td></tr>'; -->
+					 Detailproductsname += '<tr id="" /><td><img src="'+setUrlImageProduts+'"></td><td>ID '+ setUrlProduct["product"]["id"] +' nama produk '+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td></tr>';
 					 Detailproductsnamecategori += ' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+'';
 					 Detailproductsname += '<div class="col-md-3 col-sm-6 hero-feature"><div class="thumbnail"><img src="'+setUrlImageProduts+'" alt=""><div class="caption">'+ setUrlProduct["product"]["id"] +'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p><p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a></p></div></div></div>';
 					 $('#Detailproductsname').append(Detailproductsname); 
-					<!-- $('#categories').append(Detailproductsnamecategori); -->
+					$('#categories').append(Detailproductsnamecategori);
 				});
 				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';	
 			}
@@ -205,6 +204,6 @@
 
 		
 	});
-	
+	*/
 	$.ajaxSetup({ cache: true });
 </script>
