@@ -135,6 +135,20 @@
 	var key = "ARMMR8JEW5FLK7AS63FLHUU72I29QDXP";
 	var password = "";
 	
+	function xmlToString(xmlData) { 
+
+    var xmlString;
+    //IE
+    if (window.ActiveXObject){
+        xmlString = xmlData.xml;
+    }
+    // code for Mozilla, Firefox, Opera, etc.
+    else{
+        xmlString = (new XMLSerializer()).serializeToString(xmlData);
+    }
+    return xmlString;
+	}   
+	
 	$.ajaxSetup({
 		cache: true ,
 		beforeSend: function(xhr) {
@@ -146,26 +160,21 @@
 			<!-- xhr.setRequestHeader('Authorization', '...'); -->
 		},
 	});
-	var a;
-	$.get("http://go-obat.com/markets/api/products",function(xml) {
-                a = $(xml).children().children();
-				b = a.text();
+	
+	var nama = 'raziz';
+	var active = 1;
+	$.get("http://go-obat.com/markets/api/zones?schema=blank",function(xml) {
+                
+				$(xml).children().children()[0].childNodes[3].innerHTML = nama;
+				$(xml).children().children()[0].childNodes[5].innerHTML = active;
+				//xml.name = 'razi';
+				console.log(xml);
+				//return xml;
+				$.post('http://go-obat.com/markets/api/zones',xmlToString(xml),'text');
 				
-				/*$(xml).children().children().each(function(index) {
-				console.log(index + ": " + $(this).text() );
-				});*/
-				//$.post("http://go-obat.com/markets/api/products",a,"xml");
 				
-				/*var id = 0;
-				for ( i = 0 ; i<a.length ;i++)
-				{
-					a[i] = 
-					console.log(a[i]);
-				}
-				*/
-				console.log(a);
-            },"text");
-	//console.log(a);
+            },'xml');
+//	console.log(xml);
 	
 	/*$.getJSON(urlCategories,function(dataCategories){
 		categories = dataCategories['categories'];
