@@ -34,7 +34,7 @@ function postData(objectName){
 					if ( i == lastArray && associationExistence == 1 ){
 						for ( j = 0 ; j < associationLength ; j++ ){
 							if ( associationChildren.children[j].nodeName == 'id' )
-								{j=1;}
+								 { continue;}
 								associationChildren.children[j].innerHTML = objectData[objectCode][i-1+j];}}
 							else
 								{objectChildren.children[i].innerHTML = objectData[objectCode][i-1];}}

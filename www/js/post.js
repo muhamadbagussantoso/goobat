@@ -18,6 +18,7 @@ function codeReturn(name){
 function postData(objectName){					
 		$.get( urlapi + objectName + "?schema=blank",
 			function(xml) {
+				var objectCode = 4;
 				var objectCode = codeReturn(objectName);
 				console.log(objectCode);
 				var objectChildren = $(xml).children().children()[0];
@@ -34,7 +35,7 @@ function postData(objectName){
 					if ( i == lastArray && associationExistence == 1 ){
 						for ( j = 0 ; j < associationLength ; j++ ){
 							if ( associationChildren.children[j].nodeName == 'id' )
-								{j=1;}
+								 { continue;}
 								associationChildren.children[j].innerHTML = objectData[objectCode][i-1+j];}}
 							else
 								{objectChildren.children[i].innerHTML = objectData[objectCode][i-1];}}

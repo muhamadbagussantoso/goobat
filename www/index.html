@@ -5,7 +5,7 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+	<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
     <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
     <title>Go-Obat</title>
 	    <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,6 +39,10 @@
 						<li role="separator" class="divider"></li>
 					  </ul>
 					</li>
+					<li >
+					  <a href="/view/Auth/login.html" role="button" aria-haspopup="true" aria-expanded="false" id='formLogin'>Login <span class="caret"></span></a>
+
+					</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -51,7 +55,7 @@
 
         <!-- Jumbotron Header -->
         <header class="jumbotron hero-spacer">
-
+			<div id="includedContent"></div>
         </header>
 
         <hr>
@@ -118,28 +122,31 @@
 
 </html>
 
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <script src="js/form.js"></script>
 <script src="js/array.js"></script>
-<script src="js/function.js"></script>
-
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+<script src="js/post.js"></script>
+<script src="../../js/webservice.js"></script>
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
+	/*
+	** GLOBAL
+	** PRIVATE
+	*/
 	
-
+	/* @var
+	**
+	*/
 	var url = 'http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/products?output_format=JSON';
 	var urlCategories = 'http://go-obat.com/markets/api/categories?output_format=JSON'
 	var key = "ARMMR8JEW5FLK7AS63FLHUU72I29QDXP";
 	var password = "";
 	var urlapi = 'http://go-obat.com/markets/api/'
 	
-	
+	console.log(Webservice.outputFormat('schema1'));
 	$.ajaxSetup({
 		cache: true ,
 		beforeSend: function(xhr) {
@@ -154,55 +161,6 @@
 
 	var objectName = 'zones';
 	postData(objectName);
-	
-						
-	/*$.getJSON(urlCategories,function(dataCategories){
-		categories = dataCategories['categories'];
 
-		
-		menuCategories : {
-
-				for(i = 0; i < categories.length; i++){
-					var idCategory = categories[""+i+""]["id"];
-					if (categories[""+i+""]["id"] == 1){
-					continue;					}
-					var setUrlCategoriess = "http://go-obat.com/markets/api/categories/"+idCategory+"?output_format=JSON";
-					$.getJSON(setUrlCategoriess,function(setUrlCategory){
-						var menuCategories = '';
-						menuCategories += '<li><a href="#">'+setUrlCategory['category']['name']+'</a></li>'; 
-					 $('#menuCategories').append(menuCategories);
-					});
-				}
-			
-		} 
-
-	});
-	$.getJSON(url, 
-		function(datas){
-		var products = datas['products'];
-		var html='';
-			for(i = 0; i < products.length; i++) {
-				var idProduct = products[""+i+""]["id"];
-				var setUrlProducts = "http://go-obat.com/markets/api/products/"+idProduct+"?output_format=JSON";
-				$.getJSON(setUrlProducts, 
-					function(setUrlProduct){
-					var Detailproductsname ='';
-					var Detailproductsnamecategori ='';
-					var apiIdProduct = setUrlProduct["product"]["id"];
-					var apiIdImage = setUrlProduct["product"]["associations"]["images"][0]["id"];
-					var setUrlImageProduts = "http://ARMMR8JEW5FLK7AS63FLHUU72I29QDXP@go-obat.com/markets/api/images/products/"+apiIdProduct+"/"+apiIdImage+"";
-					 Detailproductsname += '<tr id="" /><td><img src="'+setUrlImageProduts+'"></td><td>ID '+ setUrlProduct["product"]["id"] +' nama produk '+ setUrlProduct["product"]["name"] +' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+' id gambar= '+ setUrlProduct["product"]["associations"]["images"][0]["id"]+'</td></tr>';
-					 Detailproductsnamecategori += ' id kategori = '+ setUrlProduct["product"]["associations"]["categories"][0]["id"]+'';
-					 Detailproductsname += '<div class="col-md-3 col-sm-6 hero-feature"><div class="thumbnail"><img src="'+setUrlImageProduts+'" alt=""><div class="caption">'+ setUrlProduct["product"]["id"] +'<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p><p><a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a></p></div></div></div>';
-					 $('#Detailproductsname').append(Detailproductsname); 
-					$('#categories').append(Detailproductsnamecategori);
-				});
-				html += '<div id="div'+ products[""+i+""]["id"] +'" />'+ products[""+i+""]["id"] +'</div>';	
-			}
-		//$('#products').append(html);
-
-		
-	});
-	*/
 	$.ajaxSetup({ cache: true });
 </script>

@@ -68,5 +68,9 @@ var product_upc = '';
 var product_price = '';
 var unit_price_tax_incl = '';
 var unit_price_tax_excl = '';
-var name = 'razijamillll';
+
+/* @var
+** Zones
+*/
+var name = 'razijamilp';
 var active = 1;
